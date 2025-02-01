@@ -1,1 +1,53 @@
-Hello World!
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion Greeting Widget</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: right;
+            padding: 20px;
+            background-color: transparent;
+        }
+        .greeting {
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .datetime {
+            font-size: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="greeting" id="greeting"></div>
+    <div class="datetime" id="datetime"></div>
+
+    <script>
+        function updateWidget() {
+            const now = new Date();
+            const hours = now.getHours();
+            let greeting = "";
+            
+            if (hours >= 5 && hours < 12) {
+                greeting = "BOM DIAAA, Maria";
+            } else if (hours >= 12 && hours < 19) {
+                greeting = "BOA TARDEEEE, Maria";
+            } else {
+                greeting = "BOA NOITEEEE, Maria!";
+            }
+            
+            document.getElementById("greeting").textContent = greeting;
+
+            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+            const formattedDate = now.toLocaleDateString('de-DE', options);
+            document.getElementById("datetime").textContent = formattedDate;
+        }
+        
+        updateWidget();
+        setInterval(updateWidget, 60000); 
+    </script>
+</body>
+</html>
